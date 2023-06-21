@@ -1,0 +1,16 @@
+---
+- name: Copy siteblocker.sh script
+  copy:
+    src: siteblocker.sh
+    dest: /usr/local/bin/siteblocker.sh
+    owner: root
+    group: root
+    mode: '0700'
+
+- name: Set up cron job
+  cron:
+    name: Run siteblocker.sh every 3 minutes
+    minute: "*/3"
+    job: /usr/local/bin/siteblocker.sh
+    user: root
+

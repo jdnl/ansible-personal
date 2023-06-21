@@ -7,4 +7,4 @@
   roles:
     - user_management
     - app_installation
-
+    - cronjob_setup
