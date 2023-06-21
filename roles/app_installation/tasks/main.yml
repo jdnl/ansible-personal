@@ -1,0 +1,56 @@
+---
+- name: Add Obsidian repository key
+  apt_key:
+    url: https://obsidian.md/obsidian.asc
+    state: present
+
+- name: Add Obsidian repository
+  apt_repository:
+    repo: "deb https://obsidian.md/apt bookworm main"
+    state: present
+
+- name: Install Obsidian
+  apt:
+    name: obsidian
+    state: present
+
+- name: Install dependencies for LunarVim
+  apt:
+    name: [git, curl, gawk, ripgrep]
+    state: present
+
+- name: Install FiraCode Nerd Font
+  apt:
+    name: fonts-firacode
+    state: present
+
+- name: Clone LunarVim repository
+  git:
+    repo: https://github.com/ChristianChiarulli/LunarVim.git
+    dest: ~/lunarvim
+    version: master
+
+- name: Install LunarVim
+  command: |
+    bash ~/lunarvim/utils/installer/install.sh
+
+- name: Install Docker dependencies
+  apt:
+    name: [apt-transport-https, ca-certificates, curl, software-properties-common]
+    state: present
+
+- name: Add Docker GPG key
+  apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    state: present
+
+- name: Add Docker repository
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/debian bookworm stable"
+    state: present
+
+- name: Install Docker
+  apt:
+    name: docker-ce
+    state: present
+

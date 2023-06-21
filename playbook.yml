@@ -1,0 +1,10 @@
+---
+- name: Install Obsidian, LunarVim, FiraCode Nerd Font, and Docker
+  hosts: local
+  become: true
+  gather_facts: true
+
+  roles:
+    - user_management
+    - app_installation
+

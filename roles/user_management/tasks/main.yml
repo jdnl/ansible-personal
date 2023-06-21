@@ -1,0 +1,20 @@
+---
+- name: Add user jdnl
+  user:
+    name: jdnl
+    shell: /bin/bash
+    createhome: yes
+
+- name: Add jdnl to the docker group
+  user:
+    name: jdnl
+    groups: docker
+    append: yes
+
+- name: Add jdnl to the sudoers file
+  lineinfile:
+    path: /etc/sudoers
+    line: "jdnl ALL=(ALL:ALL) ALL"
+    validate: visudo
+    state: present
+
