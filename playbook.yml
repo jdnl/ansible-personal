@@ -1,10 +1,17 @@
 ---
-- name: Install Obsidian, LunarVim, FiraCode Nerd Font, and Docker
+- name: Install development tools, productivity tools, and cronjob
   hosts: local
-  become: true
+  become: yes
   gather_facts: true
+  vars:
+    user: jdnl
 
   roles:
-    - user_management
-    - app_installation
-    - cronjob_setup
+    #- install_development_tools
+    #- productivity_tools
+    #- cronjob_setup
+    #- lunarvim_prep
+    #- regolith_config
+    #- nerd_font
+     # - kitty_terminal
+     - lazygit

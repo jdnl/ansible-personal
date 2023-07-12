@@ -1,0 +1,12 @@
+- name: Create .fonts directory if it doesn't exist
+  file:
+    path: "/home/{{ user }}/.local/share/fonts/"
+    state: directory
+    mode: '0755'
+
+- name: Download Hack Nerd Font Mono Regular
+  get_url:
+    url: https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/Regular/HackNerdFontMono-Regular.ttf
+    dest: "/home/{{ user }}/.local/share/fonts/Hack Regular Nerd Font Complete Mono.ttf"
+    mode: '0644'
+  notify: update font cache

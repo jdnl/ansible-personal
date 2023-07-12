@@ -1,0 +1,10 @@
+---
+- name: Install Snap
+  apt:
+    name: snapd
+    state: present
+    update_cache: yes
+
+- name: Install Obsidian
+  command: snap install obsidian
+

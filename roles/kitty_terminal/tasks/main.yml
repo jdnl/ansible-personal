@@ -1,0 +1,20 @@
+- name: Install kitty
+  shell: curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+  args:
+    executable: /bin/bash
+  become: no
+
+- name: Create symbolic link for kitty
+  file:
+    src: /home/{{ user }}/.local/kitty.app/bin/kitty
+    dest: /home/{{ user }}/.local/bin/kitty
+    state: link
+  become: no
+
+- name: Create symbolic link for kitten
+  file:
+    src: /home/{{ user }}/.local/kitty.app/bin/kitten
+    dest: /home/{{ user }}/.local/bin/kitten
+    state: link
+  become: no
+

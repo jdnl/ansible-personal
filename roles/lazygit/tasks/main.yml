@@ -1,0 +1,21 @@
+- name: Get latest release JSON from GitHub
+  uri:
+    url: https://api.github.com/repos/jesseduffield/lazygit/releases/latest
+    return_content: yes
+  register: latest_release_json
+
+- name: Parse JSON to get asset download URL
+  set_fact:
+    lazygit_url: "{{ latest_release_json.json.assets | selectattr('name', 'match', '^lazygit_[0-9._-]*_Linux_x86_64.tar.gz$') | map(attribute='browser_download_url') | first }}"
+
+- name: Download lazygit binary release from GitHub
+  get_url:
+    url: "{{ lazygit_url }}"
+    dest: "/tmp/lazygit.tar.gz"
+
+- name: Unarchive lazygit binary to the specified directory
+  unarchive:
+    src: "/tmp/lazygit.tar.gz"
+    dest: "/home/{{ user }}/.local/bin/"
+    remote_src: yes
+

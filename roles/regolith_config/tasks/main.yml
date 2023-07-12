@@ -1,0 +1,8 @@
+---
+- name: Install i3xrocks packages
+  apt:
+    name:
+      - i3xrocks-rofication
+      - i3xrocks-battery
+    state: present
+    update_cache: yes

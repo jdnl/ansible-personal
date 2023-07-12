@@ -1,0 +1,52 @@
+---
+- name: Install dependencies
+  apt:
+    name:
+      - make
+      - git
+      - python3-pip
+      - python3
+      - nodejs
+      - npm
+    state: present
+    update_cache: yes
+
+    #- name: Install lazygit
+    #snap:
+    #name: lazygit
+    #state: present
+
+- name: Install Latest Rust and Cargo
+  become: yes
+  become_user: "{{ user }}"
+  shell: curl https://sh.rustup.rs -sSf | sh -s -- -y
+  args:
+    executable: /bin/bash
+
+- name: Download Neovim AppImage
+  get_url:
+    url: https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+    dest: /tmp/nvim.appimage
+    mode: '0755'
+
+- name: Move Neovim AppImage to /usr/bin
+  command: mv /tmp/nvim.appimage /usr/bin/nvim
+  args:
+    creates: /usr/bin/nvim
+
+- name: Download Lunarvim installer
+  get_url:
+    url: https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh
+    dest: "/home/{{ user }}/install_lunarvim.sh"
+    mode: '0755'
+
+- name: Change the owner of the installer
+  file:
+    path: "/home/{{ user }}/install_lunarvim.sh"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+
+- name: Display reminder to install LunarVim
+  debug:
+    msg: "lunvarvim_installer.sh has been added to the home directory, run it."
+
