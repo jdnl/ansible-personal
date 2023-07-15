@@ -4,14 +4,14 @@
   become: yes
   gather_facts: true
   vars:
-    user: jdnl
+    user: FILL_ME_IN
 
   roles:
-    #- install_development_tools
-    #- productivity_tools
-    #- cronjob_setup
-    #- lunarvim_prep
-    #- regolith_config
-    #- nerd_font
-     # - kitty_terminal
-     - lazygit
+    - install_development_tools
+    - productivity_tools
+    - cronjob_setup
+    - lunarvim_prep
+    - regolith_config
+    - nerd_font
+    - kitty_terminal
+    - lazygit

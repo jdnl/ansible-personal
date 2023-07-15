@@ -1,4 +1,11 @@
 # ansible-personal
 
-`sudo apt install -y ansible`  
-`ansible-playbook -i inventory.ini playbook.yml`
+Install debian 12 without any desktop environments  
+  
+```
+# Install regolith desktop
+chmod +x bootstrap.sh
+./bootstrap.sh
+
+ansible-playbook -i inventory playbook.yml
+```
