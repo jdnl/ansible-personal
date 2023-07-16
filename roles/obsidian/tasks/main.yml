@@ -7,6 +7,7 @@
       Accept: "application/vnd.github.v3+json"
   register: json_response
 
+
 - set_fact: 
     latest_version: "{{ json_response.json.tag_name }}"
     download_url: "https://github.com/obsidianmd/obsidian-releases/releases/download/{{ json_response.json.tag_name }}/Obsidian-{{ json_response.json.tag_name.split('v')[1] }}.AppImage"
@@ -16,12 +17,14 @@
     url: "{{ download_url }}"
     dest: "/tmp/Obsidian-{{ latest_version.split('v')[1] }}.AppImage"
     mode: '0755'
+  become: no
 
 - name: Ensure /home/username/.local/bin directory exists
   file:
     path: "/home/{{ user }}/.local/bin"
     state: directory
     mode: '0755'
+  become: no
 
 - name: Move and rename downloaded appimage
   copy:
@@ -29,17 +32,20 @@
     dest: "/home/{{ user }}/.local/bin/Obsidian"
     remote_src: yes
     mode: '0755'
+  become: no
 
 - name: Remove original downloaded appimage
   file:
     path: "/tmp/Obsidian-{{ latest_version.split('v')[1] }}.AppImage"
     state: absent
+  become: no
 
 - name: Ensure /home/username/.local/share/applications directory exists
   file:
     path: "/home/{{ user }}/.local/share/applications"
     state: directory
     mode: '0755'
+  become: no
 
 - name: Create .desktop file so app shows up in dmenu
   copy:
@@ -52,3 +58,4 @@
       Type=Application
       Categories=Office;
     mode: '0644'
+  become: no
