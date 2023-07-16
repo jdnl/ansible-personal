@@ -15,4 +15,4 @@ sudo apt update
 sudo apt install regolith-desktop
 
 # Install ansible
-sudo apt install python3 ansible
+sudo apt install ansible

@@ -1,5 +1,5 @@
 ---
-- name: Install dependencies
+- name: Install dependencies (make, git, python3-pip, python3, nodejs, npm)
   apt:
     name:
       - make
