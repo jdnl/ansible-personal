@@ -35,6 +35,12 @@
     path: "/tmp/Obsidian-{{ latest_version.split('v')[1] }}.AppImage"
     state: absent
 
+- name: Ensure /home/username/.local/share/applications directory exists
+  file:
+    path: "/home/{{ user }}/.local/share/applications"
+    state: directory
+    mode: '0755'
+
 - name: Create .desktop file so app shows up in dmenu
   copy:
     dest: "/home/{{ user }}/.local/share/applications/obsidian.desktop"
