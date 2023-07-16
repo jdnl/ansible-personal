@@ -17,6 +17,12 @@
     dest: "/tmp/Obsidian-{{ latest_version.split('v')[1] }}.AppImage"
     mode: '0755'
 
+- name: Ensure /home/username/.local/bin directory exists
+  file:
+    path: "/home/{{ user }}/.local/bin"
+    state: directory
+    mode: '0755'
+
 - name: Move and rename downloaded appimage
   copy:
     src: "/tmp/Obsidian-{{ latest_version.split('v')[1] }}.AppImage"
