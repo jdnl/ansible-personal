@@ -7,8 +7,8 @@
     user: FILL_ME_IN
 
   roles:
-    - install_development_tools
-    - productivity_tools
+    - docker
+    - obsidian
     - cronjob_setup
     - lunarvim_prep
     - regolith_config

@@ -3,7 +3,6 @@
   apt:
     name:
       - curl
-      - git
       - docker.io
     state: present
     update_cache: yes
@@ -13,13 +12,6 @@
     name: "{{ user }}"
     groups: docker
     append: yes
-
-- name: Install Lunarvim
-  shell: |
-    bash <(curl -s https://raw.githubusercontent.com/ChristianChiarulli/lunarvim/master/utils/installer/install.sh)
-
-- name: Reload shell
-  shell: exec $SHELL
 
 - name: Ensure docker service is running
   systemd:

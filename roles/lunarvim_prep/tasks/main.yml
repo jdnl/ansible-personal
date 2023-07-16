@@ -11,11 +11,6 @@
     state: present
     update_cache: yes
 
-    #- name: Install lazygit
-    #snap:
-    #name: lazygit
-    #state: present
-
 - name: Install Latest Rust and Cargo
   become: yes
   become_user: "{{ user }}"
