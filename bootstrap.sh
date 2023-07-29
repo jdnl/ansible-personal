@@ -1,15 +1,5 @@
 #!/bin/bash
 
-install_gpg() {
-  # gpg might be installed by gnome-core/git already
-  sudo apt install -y gpg
-}
-
-install_gnome() {
-  # Install gnome with minimal excess bloat
-  sudo apt install -y --no-install-recommends gnome-session gdm3
-}
-
 install_regolith_desktop() {
   # Install regolith-desktop (bookworm)
   wget -qO - https://regolith-desktop.org/regolith.key | gpg --dearmor | sudo tee /usr/share/keyrings/regolith-archive-keyring.gpg > /dev/null
@@ -19,16 +9,10 @@ install_regolith_desktop() {
   sudo apt install -y regolith-desktop
 }
 
-install_ansible() {
-  # Install ansible
-  sudo apt install -y ansible
-}
-
 main() {
-  install_gpg
-  install_gnome
+  sudo apt update && sudo apt upgrade -y
+  sudo apt install -y gpg lightdm ansible
   install_regolith_desktop
-  install_ansible
 }
 
 main
