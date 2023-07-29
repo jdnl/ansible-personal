@@ -1,5 +1,6 @@
 ---
 - name: Install dependencies (make, git, python3-pip, python3, nodejs, npm)
+  become: yes
   apt:
     name:
       - make
@@ -12,8 +13,6 @@
     update_cache: yes
 
 - name: Install Latest Rust and Cargo
-  become: yes
-  become_user: "{{ user }}"
   shell: curl https://sh.rustup.rs -sSf | sh -s -- -y
   args:
     executable: /bin/bash
@@ -24,10 +23,10 @@
     dest: /tmp/nvim.appimage
     mode: '0755'
 
-- name: Move Neovim AppImage to /usr/bin
-  command: mv /tmp/nvim.appimage /usr/bin/nvim
+- name: Move Neovim AppImage to user's local bin
+  command: mv /tmp/nvim.appimage /home/{{ ansible_user_id }}/.local/bin/nvim
   args:
-    creates: /usr/bin/nvim
+    creates: /home/{{ ansible_user_id }}/.local/bin/nvim
 
 - name: Download Lunarvim installer
   get_url:
