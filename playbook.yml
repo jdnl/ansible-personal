@@ -1,7 +1,6 @@
 ---
 - name: Install development tools, productivity tools, and cronjob
   hosts: local
-  become: yes
   gather_facts: true
   vars:
     user: FILL_ME_IN

@@ -1,5 +1,6 @@
 ---
 - name: Install i3xrocks packages
+  become: yes
   apt:
     name:
       - i3xrocks-rofication
