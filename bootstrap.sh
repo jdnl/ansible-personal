@@ -13,6 +13,7 @@ main() {
   sudo apt update && sudo apt upgrade -y
   sudo apt install -y gpg lightdm ansible
   install_regolith_desktop
+  sudo systemctl restart lightdm
 }
 
 main
