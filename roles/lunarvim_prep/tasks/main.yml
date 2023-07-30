@@ -5,12 +5,22 @@
     name:
       - make
       - git
-      - python3-pip
-      - python3
       - nodejs
-      - npm
     state: present
     update_cache: yes
+
+- name: Install nvm
+  ansible.builtin.shell: >
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash
+  args:
+    creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+
+- name: Install latest LTS Node.js
+  shell: |
+    . /home/{{ user }}/.nvm/nvm.sh
+    nvm install lts
+  args:
+    executable: /bin/bash
 
 - name: Install Latest Rust and Cargo
   shell: curl https://sh.rustup.rs -sSf | sh -s -- -y
