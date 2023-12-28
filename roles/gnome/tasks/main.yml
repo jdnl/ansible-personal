@@ -1,0 +1,6 @@
+---
+- name: Set capslock to ctrl for GNOME using dconf
+  dconf:
+    key: "/org/gnome/desktop/input-sources/xkb-options"
+    value: "['lv3:ralt_switch', 'caps:ctrl_modifier']"
+
